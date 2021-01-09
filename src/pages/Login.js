@@ -17,7 +17,7 @@ export default function Login() {
         console.log("submitted")
     }
     return (
-         isAuth ? <Redirect to="/admin" /> : (<div>
+         isAuth ? <Redirect to="/" /> : (<div>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>

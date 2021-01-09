@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar"
 // import jwtDecode from "jwt-decode"
 // import axios from "axios"
 import { AuthProvider} from "./context/AuthContext"
+import Post from "./pages/Post";
 // const token = localStorage.getItem("token")
 
 // if (token) {
@@ -27,11 +28,11 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Switch>
-            <PrivateRoute path="/admin" component={Dashboard}/>
+            <PrivateRoute exact path="/" component={Dashboard}/>
             <Route  path="/register" component={Register}/>
             <Route  path="/login" component={Login}/>
             {/* <button onClick={() => console.log(test())}></button> */}
-                      {/* <Route exact path="/users/:userId" component={User}/> */}
+            <PrivateRoute path="/posts/:postId" component={Post}/>
             </Switch>
         </BrowserRouter>
       </AuthProvider>
