@@ -15,13 +15,62 @@ export function AuthProvider({children}) {
   const [error, setError] = useState()
 
   
-  function register() {
+  function register(userData) {
+    if(isAuth) {
+      return
+    }
+    setLoading(true)
+    axios.post("http://localhost:4000/register", userData)
+    .then(res => {
+      setCurrentUser(res.data.user)
+      localStorage.setItem("token", res.data.token)
+      setToken(res.data.token)
+      setIsAuth(true)
+      setLoading(false)
+      setError(null)
+    })
+    .catch(err => {
+      setToken(null)
+      localStorage.removeItem("token")
+      setCurrentUser(null)
+      setIsAuth(false)
+      setLoading(false)
+      console.log(err)
+      setError("Failed to register")
+    })
   }
 
-  function login() {
+  function login(userData) {
+    if(isAuth) {
+      return
+    }
+    setLoading(true)
+    axios.post("http://localhost:4000/login", userData)
+    .then(res => {
+      setCurrentUser(res.data.user)
+      localStorage.setItem("token", res.data.token)
+      setToken(res.data.token)
+      setIsAuth(true)
+      setLoading(false)
+      setError(null)
+    })
+    .catch(err => {
+      setToken(null)
+      localStorage.removeItem("token")
+      setCurrentUser(null)
+      setIsAuth(false)
+      setLoading(false)
+      console.log(err)
+      setError("Failed to log in")
+    })
   }
 
   function logout() {
+    setIsAuth(false)
+    setCurrentUser(null)
+    setToken(null)
+    localStorage.removeItem("token");
+    setError(null)
   }
 
   useEffect(() => {
@@ -40,8 +89,8 @@ export function AuthProvider({children}) {
       setCurrentUser(null)
       setIsAuth(false)
       setLoading(false)
+      setError(null)
       console.log("user not logged in")
-      setError("User not logged In")
     })
   }, [token])
 

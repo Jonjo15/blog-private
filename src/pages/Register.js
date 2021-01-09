@@ -6,9 +6,16 @@ export default function Register() {
     const [familyName, setFamilyName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const {isAuth} = useAuth()
+    const {isAuth, register} = useAuth()
     const handleSubmit = e => {
         e.preventDefault()
+        const userData = {
+            first_name: firstName,
+            family_name: familyName,
+            email,
+            password
+        }
+        register(userData);
         console.log("submitted")
     }
     return (
@@ -22,7 +29,7 @@ export default function Register() {
                 <label htmlFor="email">Email:</label>
                 <input onChange={(e) => setEmail(e.target.value)} value={email} type="text" name="email" id="email"/>
                 <label htmlFor="password">Password</label>
-                <input onChange={(e) => setPassword(e.target.password)} value={password} type="password" name="password" id="password"/>
+                <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" name="password" id="password"/>
                 <button type="submit">Log In</button>
             </form>
             <small>Already have an account? Log in <Link to="/login">here</Link></small>
