@@ -16,3 +16,29 @@ code {
   margin: 0 auto;
   font-family: monospace;
 }
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  color: black;
+  margin-right: 15px;
+}
+.navbar {
+  height: 100px;
+  width: 100%;
+  padding: 10px;
+  background-color: aquamarine;
+  font-size: 2rem;
+}
+button {
+  margin: 10px;
+}
+.user-card {
+  background-color: aquamarine;
+  width: 40%;
+  height: 200px;
+}

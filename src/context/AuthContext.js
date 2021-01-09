@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext, createContext} from "react"
 import axios from "axios"
-import {tokenConfig} from "../util/util"
+// import {tokenConfig} from "../util/util"
 const AuthContext = createContext();
 
 export function useAuth() {
@@ -30,12 +30,15 @@ export function AuthProvider({children}) {
     axios.get("http://localhost:4000/user")
     .then(res => {
       setIsAuth(true)
-      setLoading(false)
       setCurrentUser(res.data.user)
       console.log(res.data)
       setError(null)
+      setLoading(false)
     })
     .catch(err => {
+      setToken(null)
+      setCurrentUser(null)
+      setIsAuth(false)
       setLoading(false)
       console.log("user not logged in")
       setError("User not logged In")
@@ -47,6 +50,7 @@ export function AuthProvider({children}) {
     token,
     isAuth,
     error,
+    loading,
     login,
     register,
     logout,

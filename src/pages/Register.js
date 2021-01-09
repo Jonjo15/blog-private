@@ -1,17 +1,18 @@
 import React, {useState} from 'react'
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
+import {useAuth } from "../context/AuthContext"
 export default function Register() {
     const [firstName, setFirstName] = useState("")
     const [familyName, setFamilyName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
+    const {isAuth} = useAuth()
     const handleSubmit = e => {
         e.preventDefault()
         console.log("submitted")
     }
     return (
-        <div>
+        isAuth ? <Redirect to="/admin" /> : (<div>
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="first-name">First Name:</label>
@@ -25,6 +26,7 @@ export default function Register() {
                 <button type="submit">Log In</button>
             </form>
             <small>Already have an account? Log in <Link to="/login">here</Link></small>
-        </div>
+        </div>)
+        
     )
 }

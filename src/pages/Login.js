@@ -1,16 +1,18 @@
 import React, {useState} from 'react'
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
+import {useAuth} from "../context/AuthContext"
 // import {useAuth} from "../context/AuthContext"
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const {isAuth} = useAuth()
     // const {token} = useAuth()
     const handleSubmit = e => {
         e.preventDefault()
         console.log("submitted")
     }
     return (
-        <div>
+         isAuth ? <Redirect to="/admin" /> : (<div>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
@@ -21,6 +23,7 @@ export default function Login() {
                 {/* {token && token} */}
             </form>
             <small>Don't have an account? Sign up <Link to="/register">here</Link></small>
-        </div>
+        </div>)
+        
     )
 }

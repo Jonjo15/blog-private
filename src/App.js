@@ -3,6 +3,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard"
 import PrivateRoute from "./components/PrivateRoute"
+import Navbar from "./components/Navbar"
 // import jwtDecode from "jwt-decode"
 // import axios from "axios"
 import { AuthProvider} from "./context/AuthContext"
@@ -22,9 +23,9 @@ import { AuthProvider} from "./context/AuthContext"
 function App() {
   return (
       <div className="App">
-        <h1>Hello world</h1>
       <AuthProvider>
         <BrowserRouter>
+          <Navbar />
           <Switch>
             <PrivateRoute path="/admin" component={Dashboard}/>
             <Route  path="/register" component={Register}/>
