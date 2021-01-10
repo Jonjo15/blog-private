@@ -3,9 +3,10 @@ import axios from "axios"
 import {useAuth} from "../context/AuthContext"
 import UserDetails from "../components/UserDetails";
 import PostPreview from "../components/PostPreview"
+import {Redirect} from "react-router-dom"
 // import jwtDecode from "jwt-decode"
 export default function Dashboard() {
-    const {token} = useAuth()
+    const {token, isAuth} = useAuth()
     const [posts, setPosts] = useState([])
     const [error, setError] = useState(null)
     useEffect(() => {
@@ -18,12 +19,12 @@ export default function Dashboard() {
             setError(err)
         })
     }, [token])
-    return (
+    return isAuth ? (
         <div className="dashboard-wrapper">
             <button>Create a new blog post</button>
             <UserDetails />
             {posts.map(post => <PostPreview key={post._id} post={post}/>)}
             {error && <span>{error}</span>}
         </div>
-    )
+    ) : <Redirect to="/login"/>
 }

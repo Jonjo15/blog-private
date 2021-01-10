@@ -5,7 +5,7 @@ import AddComment from "../components/AddComment"
 import BlogPost from '../components/BlogPost'
 import Comment from "../components/Comment"
 import {useAuth} from "../context/AuthContext"
-export default function Post() {
+export default function Post({setPosts}) {
     const [post, setPost] = useState({})
     const [comments, setComments] = useState([])
     const [loading, setLoading] = useState(true)
@@ -27,7 +27,7 @@ export default function Post() {
             {loading && <h2>Loading....</h2>}
             {!loading && <BlogPost post={post}/>}
             {!loading && !showForm && <button style={{marginBottom: 20}} onClick={() => setShowForm(true)}>Add a comment</button>}
-            {!loading && comments.map((comment,i) => <Comment key={comment._id} comment={comment}/>)}
+            {!loading && comments.map((comment,i) => <Comment setComments={setComments} key={comment._id} comment={comment}/>)}
             {!loading && showForm && <AddComment setShowForm={setShowForm} postId={params.postId} setComments={setComments}/>}
         </div>
     )

@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom"
 import {useAuth} from "../context/AuthContext"
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
-export default function Comment({comment}) {
+export default function Comment({comment, setComments}) {
     const {token} = useAuth()
     const params = useParams()
     const [error, setError] = useState()
@@ -14,6 +14,9 @@ export default function Comment({comment}) {
         axios.delete("http://localhost:4000/posts/"+ params.postId + "/comments/" + comment._id)
         .then(res => {
             console.log(res.data)
+            setComments(currComments => {
+                return currComments.filter(com => com._id !== comment._id)
+            } )
         })
         .catch(err => {
             setError(err)
