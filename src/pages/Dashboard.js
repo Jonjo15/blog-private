@@ -23,7 +23,7 @@ export default function Dashboard() {
         <div className="dashboard-wrapper">
             <button>Create a new blog post</button>
             <UserDetails />
-            {posts.map(post => <PostPreview key={post._id} post={post}/>)}
+            {posts.map(post => <PostPreview setPosts={setPosts} key={post._id} post={post}/>)}
             {error && <span>{error}</span>}
         </div>
     ) : <Redirect to="/login"/>
