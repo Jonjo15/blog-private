@@ -2,6 +2,7 @@ import React from 'react'
 import dayjs from "dayjs"
 // import axios from "axios"
 // import {useAuth} from "../context/AuthContext"
+import {Link} from "react-router-dom"
 var relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
@@ -15,6 +16,7 @@ export default function BlogPost({post, setPosts}) {
             <small>{dayjs(post.createdAt).format('DD/MM/YYYY')}</small>
             <p>{post.body}</p>
             <small>Email the author at {post.author.email}</small>
+            <Link to="/">Dashboard</Link>
         </div>
     )
 }
