@@ -11,7 +11,7 @@ export default function TogglePublish({post, setPosts}) {
     
     const handleClick = e => {
         axios.defaults.headers.common['Authorization'] = token;
-        const verb = published ? "unpublish" : "publish"
+        const verb = published === true ? "unpublish" : "publish"
         const route = "http://localhost:4000/posts/" + post._id + "/" + verb
         axios.put(route)
         .then(res => {
@@ -32,6 +32,9 @@ export default function TogglePublish({post, setPosts}) {
         })
     }
     return (
+        <>
+        <p>{published ? "Post is published" : "Post not published"}</p>
         <button onClick={handleClick}>{published ? "Unpublish" : "Publish"}</button>
+        </>
     )
 }

@@ -26,9 +26,8 @@ export default function PostPreview({post, setPosts}) {
         <div className="post-preview">
             {error && <small>{error}</small>}
             <h2>{post.title} by {post.author.first_name} {post.author.family_name}</h2>
-            <h3>{post.published ? "Published" : "Not published"}</h3>
-            <button onClick={handleDelete}>Delete Post</button>
             <TogglePublish post={post} setPosts={setPosts}/>
+            <button onClick={handleDelete}>Delete Post</button>
             <Link to={linkString}>See more</Link>
         </div>
     )

@@ -77,3 +77,36 @@ button {
 .comment p {
   font-size: 1.7rem;
 }
+form {
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+form > * {
+  margin-bottom: 10px;
+}
+.form-modal {
+  z-index: 10;
+  position: absolute;
+  min-height: 30vh;
+  background: rgb(224, 118, 118);
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  top: 240px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 3px solid black;
+}
+textarea {
+  resize: none;
+  margin-bottom: 20px;
+}

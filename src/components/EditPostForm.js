@@ -1,33 +1,21 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import {useAuth} from "../context/AuthContext"
-
-export default function AddBlogPost({setShowForm, setPosts}) {
-    const [title, setTitle] = useState("")
-    const [body, setBody] = useState("");
-    const {error, token, currentUser} = useAuth()
-
+export default function EditPostForm({setShowEdit, setPosts}) {
+    const [title, setTitle] = useState(null)
+    const [body, setBody] = useState(null)
+    const [error, setError] = useState()
+    const {token, currentUser} = useAuth()
     const handleSubmit = e => {
-        e.preventDefault()
-        const postData = {
-            title, 
-            body
-        }
         axios.defaults.headers.common['Authorization'] = token;
-        axios.post("http://localhost:4000/posts", postData)
+        axios.post("http://localhost:4000/posts")
         .then(res => {
-            //todo
-            const newPost = {...res.data.post, author: currentUser}
-            setPosts(currPosts => {
-                return [...currPosts, newPost]
-            })
-            setShowForm(false)
+            console.log(res.data)
         })
         .catch(err => {
-            //TODO
             console.error(err)
+            setError("Failed to edit blog post")
         })
-        console.log("submitted")
     }
     return (
         <div className="form-modal">
@@ -38,7 +26,7 @@ export default function AddBlogPost({setShowForm, setPosts}) {
                 <textarea onChange={(e) => setBody(e.target.value)} id="body" name="body" rows="5" cols="50" value={body}></textarea>
                 <button>Submit a new blog post</button>
             </form>
-            <button onClick={() => setShowForm(false)}>Cancel</button>
+            <button onClick={() => setShowEdit(false)}>Cancel</button>
             {error && <p>{error}</p>}
         </div>
     )
